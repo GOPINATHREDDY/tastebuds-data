@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Taste Buds</title>
+	
+	<link rel="manifest" href="manifest.json">
+	<link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+	<link rel="stylesheet" href="./css/onsenui.css">
+	<link rel="stylesheet" href="./css/onsen-css-components.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="./js/onsenui.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="./css/styles.css">
+</head>
+<body>
+	<!-- splitter & navbar -->
+	<ons-splitter>
+		<!-- side bar -->
+		<ons-splitter-side id="menu" side="left" width="50%" collapse swipeable>
+			<ons-page>
+				<ons-list>
+					{{#if user}}
+					<ons-list-item>
+						<div id="user-profile">
+							<img src="../public/images/CHEF.jpg" id="user-image">
+							<p id="user-name">ADMIN</p>
+						</div>
+					</ons-list-item>
+				     {{/if}}
+
+					<ons-list-item onclick="fn.load('main-menu.html')" tappable>
+						Home
+					</ons-list-item>
+					<ons-list-item onclick="fn.load('track.html')" tappable>
+						Track Order
+					</ons-list-item>
+					<ons-list-item onclick="fn.load('prevorder.html')" tappable>
+						Previous Order
+					</ons-list-item>
+					<ons-list-item onclick="fn.load('about.html')" tappable>
+						About Us
+					</ons-list-item>
+					<ons-list-item onclick="fn.load('faq.html')" tappable>
+						FAQs &amp; Help
+					</ons-list-item>
+					
+					{{#if user}}
+						<ons-list-item onclick="fn.load('logout.html')" tappable>
+							Logout
+						</ons-list-item>
+					{{else}}
+						<ons-list-item onclick="fn.load('login.html')" tappable>
+							Login
+						</ons-list-item>
+					{{/if}}
+				</ons-list>
+			</ons-page>
+		</ons-splitter-side>
+		
+		<!-- main content -->
+		<ons-splitter-content>
+			<ons-navigator id="mainNavigator" page="main-menu.html"></ons-navigator>
+		</ons-splitter-content>
+	</ons-splitter>
+
+	<!-- main menu -->
+	<template id="main-menu.html">
+		<ons-page id="main-menu">
+			<ons-toolbar>
+				<div class="left">
+					<ons-toolbar-button onclick="fn.open()">
+						<ons-icon icon="md-menu"></ons-icon>
+					</ons-toolbar-button>
+				</div>
+
+				<div class="center">
+					Taste Buds
+				</div>
+				<div class="right">
+					<button class="toolbar-button">
+                      <i class="fa fa-shopping-cart" style="font-size:17px" ></i>
+                    </button>
+				</div>
+			</ons-toolbar>
+
+			<!-- menu -->
+			<div>
+				<center>
+					<h4>Menu</h4>
+				</center>
+				<div style="height: 200px; padding: 1px 0 0 0" >
+                <div class="card" id="menu-items">
+               </div>
+              </div>
+				
+
+			</div>
+		</ons-page>
+	</template>
+	
+	<!-- sub menu -->
+	<template id="sub-menu.html">
+		<ons-page id="sub-menu">
+			<ons-toolbar>
+				<div class="left">
+					<ons-back-button>Back</ons-back-button>
+				</div>
+
+				<div class="center">
+					Taste Buds
+				</div>
+			</ons-toolbar>
+
+			<!-- menu -->
+			<div>
+				<center id="sub-menu-title">
+					<h4>Sub Menu</h4>
+				</center>
+				
+				<ons-list id="sub-menu-items">
+					
+				</ons-list>
+
+			</div>
+		</ons-page>
+	</template>
+
+	<!-- description page -->
+	<template id="description.html">
+		<ons-page id="description">
+			<ons-toolbar>
+				<div class="left">
+					<ons-back-button>Back</ons-back-button>
+				</div>
+
+				<div class="center">
+					Taste Buds
+				</div>
+			</ons-toolbar>
+
+			<!-- item details -->
+			<div>
+				<ons-carousel class="carousel" swipeable auto-scroll id="carousel">
+					<ons-carousel-item>
+						<img width="100%" src="./images/placeholder.png">
+					</ons-carousel-item>
+					<ons-carousel-item>
+						<img width="100%" src="./images/placeholder.png">
+					</ons-carousel-item>
+					<ons-carousel-item>
+						<img width="100%" src="./images/placeholder.png">
+					</ons-carousel-item>
+				</ons-carousel>
+
+				<div class="cover-label center">
+					<ul>
+						<li><div id="dot0" class="circle circle_current">&#x25cf;</div></li>
+						<li><div id="dot1" class="circle">&#x25cf;</div></li>
+						<li><div id="dot2" class="circle">&#x25cf;</div></li>
+					</ul>
+				</div>
+				
+				<div id="item-contents">
+					<h4 id="item-intro">
+						Item Name
+						<span style="float: right;">
+							&#8377; xxx
+						</span> <br>
+						4.5 &#9733;
+					</h4>
+					
+					<p id="item-description">Item Description</p>
+				</div>
+			</div>
+
+			<div style="padding: 30px;">
+				<ons-button modifier="large" id="add-to-cart">Add this item to your order</ons-button>
+				<p></p>
+				<ons-button modifier="large" id="check-out">Complete your order <span style="font-size: 20px;">&rarr;</span></ons-button>
+			</div>
+		</ons-page>
+	</template>
+
+	<!-- cart -->
+	<template id="cart.html">
+		<ons-page id="cart">
+			<ons-toolbar>
+				<div class="left">
+					<ons-back-button>Back</ons-back-button>
+				</div>
+
+				<div class="center">
+					Taste Buds
+				</div>
+			</ons-toolbar>
+
+			<div>
+				<ons-list >
+					<div style="height: 200px; padding: 1px 0 0 0;" id="cart-holder">
+                        <div class="card card--material">
+                             <div class="card__content card--material__content" ></div>
+                        </div>
+                       </div>
+					
+				</ons-list>
+				<button onclick="PlaceOrder()" class="button--large--cta" style="width: 95%; margin: 0 auto;">Place Order</button>
+			</div>
+		</ons-page>
+	</template>
+
+	<!-- previous orders -->
+	<template id="prevorder.html">
+		<ons-page id="prevorder">
+			<ons-toolbar>
+				<div class="left">
+					<ons-toolbar-button onclick="fn.open()">
+						<ons-icon icon="md-menu"></ons-icon>
+					</ons-toolbar-button>
+				</div>
+
+				<div class="center">
+					Taste Buds
+				</div>
+			</ons-toolbar>
+			<div>
+				<center>
+					<h4>Previous orders</h4>
+				</center>
+				
+				<ul class="list">
+                         <li class="list-item list-item--tappable">
+                               <div class="list-item__center">Tappable Item</div>
+                         </li>
+                           <li class="list-item list-item--tappable">
+                                  <div class="list-item__center">Tappable Item</div>
+                          </li>
+                            <li class="list-item list-item--tappable">
+                                   <div class="list-item__center">Tappable Item</div>
+                           </li>
+						 <li class="list-item list-item--tappable">
+                               <div class="list-item__center">Tappable Item</div>
+                         </li>
+                           <li class="list-item list-item--tappable">
+                                  <div class="list-item__center">Tappable Item</div>
+                          </li>
+                            <li class="list-item list-item--tappable">
+                                   <div class="list-item__center">Tappable Item</div>
+                           </li>
+                </ul>
+
+			</div>
+		</ons-page>
+	</template>
+	
+	<!-- track order -->
+	<template id="track.html">
+		<ons-page id="track">
+			<ons-toolbar>
+				<div class="left">
+					<ons-toolbar-button onclick="fn.open()">
+						<ons-icon icon="md-menu"></ons-icon>
+					</ons-toolbar-button>
+				</div>
+
+				<div class="center">
+					Taste Buds
+				</div>
+			</ons-toolbar>
+
+			{{#if user}} 
+				tracking here
+			{{else}}
+				<div class="modal">
+                     <div class="modal__content">
+                         Login to track your order!
+                     </div>
+</div>
+			{{/if}}
+		</ons-page>
+	</template>
+
+	<!-- about -->
+	<template id="about.html">
+		<ons-page id="about">
+			<ons-toolbar>
+				<div class="left">
+					<ons-toolbar-button onclick="fn.open()">
+						<ons-icon icon="md-menu"></ons-icon>
+					</ons-toolbar-button>
+				</div>
+
+				<div class="center">
+					Taste Buds
+				</div>
+			</ons-toolbar>
+
+			<div style="height: 200px; padding: 1px 0 0 0;">
+  <div class="card">
+    <div class="card__content">This Canteen Automation System empowers the end clients to enroll on the PWA (Progressive web app), read and select the food from e-menu card and request food online by simply choosing the food from canteen utilizing an web app. The framework is the blend of Android and in addition Web Application. By utilizing this application the work of waiters is diminished and we can likewise say that the work is invalidated. The advantage of this is if there is surge in the Canteen at that point there will be chances that the waiters will be inaccessible and the clients can straightforwardly arrange the food to the culinary specialist online by utilizing this application. .</div>
+  </div>
+</div>
+		</ons-page>
+	</template>
+
+	<!-- FAQS & help -->
+	<template id="faq.html">
+		<ons-page id="faq">
+			<ons-toolbar>
+				<div class="left">
+					<ons-toolbar-button onclick="fn.open()">
+						<ons-icon icon="md-menu"></ons-icon>
+					</ons-toolbar-button>
+				</div>
+
+				<div class="center">
+					Taste Buds
+				</div>
+			</ons-toolbar>
+
+			<p>You are in the faqs &amp; help page</p>
+		</ons-page>
+	</template>
+
+	<!-- logout -->
+	<template id="logout.html">
+		<ons-page id="logout">
+			<ons-toolbar>
+				<div class="left">
+					<ons-toolbar-button onclick="fn.open()">
+						<ons-icon icon="md-menu"></ons-icon>
+					</ons-toolbar-button>
+				</div>
+
+				<div class="center">
+					Taste Buds
+				</div>
+			</ons-toolbar>
+
+			<p>Logging out...</p>
+		</ons-page>
+	</template>
+	
+	<!-- login -->
+	<template id="login.html">
+		<ons-page id="login">
+			<ons-toolbar>
+				<div class="left">
+					<ons-toolbar-button onclick="fn.open()">
+						<ons-icon icon="md-menu"></ons-icon>
+					</ons-toolbar-button>
+				</div>
+
+				<div class="center">
+					Taste Buds
+				</div>
+			</ons-toolbar>
+
+			<div>
+				<form id="login-form">
+					<input type="text" name="username" required autofocus> 
+					<input type="password" name="password" required>
+					<button type="submit">submit</button>
+				</form>
+			</div>
+		</ons-page>
+	</template>
+
+	<script type="text/javascript" src="./js/app.js"></script>
+</body>
+</html>

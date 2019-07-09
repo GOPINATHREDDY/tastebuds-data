@@ -1,2 +1,2 @@
-# tastebuds-data
-taste buds Jason data
+# tastebuds-ui
+Progressive web app for food delivery
