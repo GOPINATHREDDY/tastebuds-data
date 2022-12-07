@@ -17,8 +17,8 @@
   },
   "homepage": "https://github.com/saikiran03/tastebuds-ui#readme",
   "dependencies": {
-    "body-parser": "^1.18.2",
-    "express": "^4.16.3",
+    "body-parser": "^1.20.1",
+    "express": "^4.18.2",
     "express-handlebars": "^3.0.0",
     "express-session": "^1.15.6",
     "mongoose": "^5.0.10",
